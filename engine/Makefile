@@ -1,10 +1,23 @@
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Wpedantic -fPIC -I.
-LDFLAGS := -shared
-LDLIBS :=
+GLFW := deps/glfw_3.4
+GLFW_LIB := $(GLFW)/lib/libglfw3.a 
+GLFW_INC := -I$(GLFW)/include
 
-SRC_DIR := impl
+GLAD := deps/glad
+GLAD_LIB := $(GLAD)/lib/libglad.a
+GLAD_INC := -I$(GLAD)/include
+
+CFLAGS := -Wall -Wextra -Wpedantic -fPIC \
+		  $(GLFW_INC) \
+		  $(GLAD_INC)
+LDFLAGS := -shared
+LDLIBS := -lwayland-client -lwayland-cursor -lwayland-egl -lxkbcommon \
+          -lGL -ldl -lpthread -lm \
+		  $(GLFW_LIB) \
+		  $(GLAD_LIB)
+
+SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
 
