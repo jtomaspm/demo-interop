@@ -11,6 +11,10 @@
   <Target Name="BuildEngine" BeforeTargets="ResolveReferences">
     <Exec 
       WorkingDirectory="$(MSBuildProjectDirectory)/../../engine"
+      Command="make clean" 
+    />
+    <Exec 
+      WorkingDirectory="$(MSBuildProjectDirectory)/../../engine"
       Command="make" 
     />
   </Target>

@@ -3,4 +3,9 @@
 
 int start_engine();
 
+int test(){
+    static int t = 0;
+    return t++;
+}
+
 #endif
