@@ -1,8 +1,15 @@
-﻿using Demo.Interop.Engine;
+﻿using Demo.Interop.Bindings;
 
-Console.WriteLine($"Test: {Engine.Test()}");
-Console.WriteLine($"Test: {Engine.Test()}");
-Console.WriteLine($"Test: {Engine.Test()}");
-Console.WriteLine($"Test: {Engine.Test()}");
+if(Engine.InitWindow() is int iwRCode && iwRCode != 0)
+{
+    Console.WriteLine($"Engine failed to init window: {iwRCode}");
+    return iwRCode;
+}
 
-Engine.Start();
+while (Engine.WindowShouldClose() == 0)
+{
+    Engine.RenderPass();
+}
+
+Engine.TerminateWindow();
+return 0;

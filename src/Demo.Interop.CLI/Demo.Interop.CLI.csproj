@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Demo.Interop.Engine/Demo.Interop.Engine.csproj" />
+    <ProjectReference Include="../Demo.Interop.Bindings/Demo.Interop.Bindings.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Demo.Interop.Bindings/Demo.Interop.Bindings.csproj" />
     <Project Path="src/Demo.Interop.CLI/Demo.Interop.CLI.csproj" />
-    <Project Path="src/Demo.Interop.Engine/Demo.Interop.Engine.csproj" />
   </Folder>
 </Solution>
