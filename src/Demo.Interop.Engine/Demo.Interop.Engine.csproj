@@ -4,6 +4,23 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <EngineNativeLibrary>$(MSBuildProjectDirectory)/../../engine/bin/engine.so</EngineNativeLibrary>
   </PropertyGroup>
+
+  <Target Name="BuildEngine" BeforeTargets="ResolveReferences">
+    <Exec 
+      WorkingDirectory="$(MSBuildProjectDirectory)/../../engine"
+      Command="make" 
+    />
+  </Target>
+
+  <ItemGroup>
+    <None Include="$(EngineNativeLibrary)"
+          Link="engine.so"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 
 </Project>
