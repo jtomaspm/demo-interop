@@ -8,7 +8,7 @@ GLAD := deps/glad
 GLAD_LIB := $(GLAD)/lib/libglad.a
 GLAD_INC := -I$(GLAD)/include
 
-CFLAGS := -Wall -Wextra -Wpedantic -fPIC \
+CFLAGS := -g -O0 -Wall -Wextra -Wpedantic -fPIC \
 		  $(GLFW_INC) \
 		  $(GLAD_INC)
 LDFLAGS := -shared

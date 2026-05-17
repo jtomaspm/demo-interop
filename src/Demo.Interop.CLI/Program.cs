@@ -1,17 +1,10 @@
-﻿using Demo.Interop.Bindings;
+﻿using Demo.Interop.Engine.UI;
 
-if(Engine.InitWindow() is int iwRCode && iwRCode != 0)
+using var window = new Window(800, 600);
+
+while (!window.ShouldClose())
 {
-    Console.WriteLine($"Engine failed to init window: {iwRCode}");
-    return iwRCode;
+    window.ProcessInput();
+    Renderer.RenderPass();
+    window.Refresh();
 }
-
-while (Engine.WindowShouldClose() == 0)
-{
-    Engine.ProcessInput();
-    Engine.RenderPass();
-    Engine.RefreshWindow();
-}
-
-Engine.TerminateWindow();
-return 0;
