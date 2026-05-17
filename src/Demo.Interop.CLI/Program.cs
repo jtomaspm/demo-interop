@@ -8,7 +8,9 @@ if(Engine.InitWindow() is int iwRCode && iwRCode != 0)
 
 while (Engine.WindowShouldClose() == 0)
 {
+    Engine.ProcessInput();
     Engine.RenderPass();
+    Engine.RefreshWindow();
 }
 
 Engine.TerminateWindow();
