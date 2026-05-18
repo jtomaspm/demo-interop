@@ -2,9 +2,18 @@ using Demo.Interop.Engine.Exceptions;
 
 namespace Demo.Interop.Engine.UI;
 
+#pragma warning disable CA1822 
+/* 
+    Window methods should not be static
+    a valid Window instance must exist
+    in the interoped C code.
+*/
+
 public class Window : IDisposable
 {
     private static Window? _instance;
+    public static Window Instance()
+        => _instance ?? throw new NullWindowException();
 
     public Window(int width, int height)
     {
@@ -31,9 +40,7 @@ public class Window : IDisposable
     }
 
     public bool ShouldClose()
-    {
-        return Bindings.Window.WindowShouldClose() == 1;
-    }
+        => Bindings.Window.WindowShouldClose() == 1;
 
     public void Refresh()
     {
@@ -47,3 +54,5 @@ public class Window : IDisposable
         GC.SuppressFinalize(this);
     }
 }
+
+#pragma warning restore CA1822
