@@ -5,33 +5,41 @@
 
 static GLFWwindow* WINDOW = NULL;
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height){
+void glfw_framebuffer_size_callback(GLFWwindow* window, int width, int height){
     (void)window;
     glViewport(0, 0, width, height);
 }
 
+void glfw_error_callback(int code, const char* description)
+{
+    printf("[ERROR][GLFW](%d): %s\n", code, description);
+}
+
 int engine_InitWindow(int width, int height){
-    glfwInit();
+    glfwSetErrorCallback(glfw_error_callback);
+
+    if (!glfwInit()) {
+        return -1;
+    }
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     WINDOW = glfwCreateWindow(width, height, "Demo Interop", NULL, NULL);
     if (WINDOW == NULL) {
-        printf("failed to create GLFW window\n");
         glfwTerminate();
         return -1;
     }
     glfwMakeContextCurrent(WINDOW);
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        printf("failed to initialize GLAD\n");
         glfwTerminate();
         return -2;
     }
 
     glViewport(0, 0, width, height);
-    glfwSetFramebufferSizeCallback(WINDOW, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(WINDOW, glfw_framebuffer_size_callback);
     
     return 0;
 }
